@@ -1,25 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using Banco;
+using Microsoft.AspNetCore;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public static class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static string? stringConection = "";
+    public static void Main(string[] args)
+    {
+        GetStringConection(args);
+        CreateWebHostBuilder(args).Build().Run();
+    }
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)=>
+                                  WebHost.CreateDefaultBuilder(args)
+                                    .UseStartup<Startup>();
+    public static void GetStringConection(string[] args)
+    {
+        stringConection = WebApplication.CreateBuilder(args).Configuration.GetConnectionString("DefaultConnection");
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
