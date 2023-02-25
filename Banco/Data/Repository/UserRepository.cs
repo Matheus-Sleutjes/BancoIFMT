@@ -23,4 +23,15 @@ public class UserRepository : IUserRepository
 	{
 		return _context.Users.AsNoTracking().Where(x => x.UserName == request.Username).FirstOrDefault();
 	}
+
+    public UserModel Get(int id)
+    {
+        return _context.Users.AsNoTracking().Where(x => x.UserId == id).FirstOrDefault();
+    }
+
+	public void Update(int id, LoginModel request)
+	{
+		var model = Get(id);
+		//_context.Users.Update();
+	}
 }

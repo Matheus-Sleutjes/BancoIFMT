@@ -29,4 +29,18 @@ public class AuthenticationController : ControllerBase
             return Ok("Autorizado!");
         return BadRequest("Não Autorizado!");
     }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+    {
+        var model = _userRepository.Get(id);
+        return Ok(model);
+    }
+
+    //[HttpPut("{id}")]
+    //public IActionResult Update([FromBody] LoginModel request, int id)
+    //{
+    //    _userRepository.Update(id, request);
+    //    return Ok();
+    //}
 }
